@@ -1,7 +1,7 @@
 public enum Drinks {
-    TEA("Tea", 5),
-    COFFEE("Coffee", 5),
-    HOT_CHOCOLATE("Hot Chocolate", 5);
+    TEA("Tea", 3),
+    COFFEE("Coffee", 8),
+    HOT_CHOCOLATE("Hot Chocolate", 10);
 
     private final String name;
     private final double price;
@@ -17,5 +17,10 @@ public enum Drinks {
 
     public double getPrice(){
         return this.price;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + ", price: " + this.price;
     }
 }
