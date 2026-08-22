@@ -34,12 +34,19 @@ public class Order {
     }
 
     public void pay(double amount){
-        System.out.println("Paid " + amount + this.customer.getPaymentMethod().getUsage_message());
+        System.out.println("Paid " + amount + " " + this.customer.getPaymentMethod().getUsage_message());
     }
 
     public String summary(){
-        String summary = "Customer: " + this.customer.getName() + "\n";
-
+        StringBuilder summary = new StringBuilder("Customer: " + this.customer.getName() + "\n");
+        for (IMenuItem menuItem : menuItems){
+            summary.append(menuItem.toString()).append("\n");
+        }
+        summary.append("---------------\n");
+        summary.append("Subtotal: " + getSubtotal() + "\n");
+        summary.append("Discount: " + getDiscount() + "\n");
+        summary.append("Total: " + getTotal());
+        return summary.toString();
     }
 
     public String toString(){

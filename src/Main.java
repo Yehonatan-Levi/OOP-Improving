@@ -2,19 +2,17 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 
-import customers.GenericCustomer;
-import customers.Member;
-import customers.RegularCustomer;
+import customers.*;
 
 void main() {
-    GenericCustomer customer = new Member("Jonathan");
+    GenericCustomer customer = new RegularCustomer("Jonathan", PaymentMethod.GIFT_CARD);
     Order order = new Order(customer);
 
     order.addDrink(Drinks.COFFEE);
     order.addDrink(Drinks.TEA);
     order.addDrink(Drinks.TEA);
 
-    System.out.println(order.getTotal());
-    System.out.println(order);
+    System.out.println(order.summary());
+    order.pay(order.getTotal());
 
 }

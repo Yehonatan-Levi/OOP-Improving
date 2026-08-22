@@ -23,6 +23,6 @@ public enum Drinks implements IMenuItem {
 
     @Override
     public String toString() {
-        return this.name + ", price: " + this.price;
+        return this.name + ": " + this.price;
     }
 }
