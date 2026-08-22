@@ -2,8 +2,11 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 
+import customers.GenericCustomer;
+import customers.RegularCustomer;
+
 void main() {
-    Customer customer = new Customer("Jonathan");
+    GenericCustomer customer = new RegularCustomer("Jonathan");
     Order order = new Order(customer);
 
     order.addDrink(Drinks.COFFEE);

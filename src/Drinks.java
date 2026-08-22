@@ -1,4 +1,6 @@
-public enum Drinks {
+import interfaces.IMenuItem;
+
+public enum Drinks implements IMenuItem {
     TEA("Tea", 3),
     COFFEE("Coffee", 8),
     HOT_CHOCOLATE("Hot Chocolate", 10);
