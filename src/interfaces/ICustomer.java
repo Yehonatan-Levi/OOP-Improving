@@ -1,11 +1,17 @@
 package interfaces;
 
+import customers.PaymentMethod;
+
+import java.util.ArrayList;
+
 import java.util.function.Function;
 
 public interface ICustomer {
 
-    public String getName();
+    String getName();
 
-    public Function<IMenuItem, Double> getDiscount();
+    PaymentMethod getPaymentMethod();
+
+    double getDiscount(ArrayList<IMenuItem> menuItems);
 
 }

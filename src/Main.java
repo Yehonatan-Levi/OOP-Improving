@@ -3,10 +3,11 @@
 
 
 import customers.GenericCustomer;
+import customers.Member;
 import customers.RegularCustomer;
 
 void main() {
-    GenericCustomer customer = new RegularCustomer("Jonathan");
+    GenericCustomer customer = new Member("Jonathan");
     Order order = new Order(customer);
 
     order.addDrink(Drinks.COFFEE);
