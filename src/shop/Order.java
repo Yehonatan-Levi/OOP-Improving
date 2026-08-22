@@ -1,3 +1,6 @@
+package shop;
+
+import discount.DiscountHandler;
 import interfaces.ICustomer;
 import interfaces.IMenuItem;
 
@@ -6,27 +9,29 @@ import java.util.ArrayList;
 public class Order {
 
     private final ICustomer customer;
-    private final ArrayList<IMenuItem> menuItems;
+    private final ArrayList<IMenuItem> orderedItems;
+    private final DiscountHandler discountHandler;
 
     public Order(ICustomer customer){
         this.customer = customer;
-        this.menuItems = new ArrayList<>();
+        this.orderedItems = new ArrayList<>();
+        this.discountHandler = new DiscountHandler(customer.getDiscounts(), ShopConstants.ACTIVE_STORE_DISCOUNTS);
     }
 
     public void addDrink(IMenuItem menuItem){
-        this.menuItems.add(menuItem);
+        this.orderedItems.add(menuItem);
     }
 
     private double getSubtotal(){
         double subtotal = 0;
-        for (IMenuItem menuItem : this.menuItems){
+        for (IMenuItem menuItem : this.orderedItems){
             subtotal += menuItem.getPrice();
         }
         return subtotal;
     }
 
     private double getDiscount(){
-        return customer.getDiscount(menuItems);
+        return discountHandler.getDiscount(this.orderedItems);
     }
 
     public double getTotal(){
@@ -39,7 +44,7 @@ public class Order {
 
     public String summary(){
         StringBuilder summary = new StringBuilder("Customer: " + this.customer.getName() + "\n");
-        for (IMenuItem menuItem : menuItems){
+        for (IMenuItem menuItem : orderedItems){
             summary.append(menuItem.toString()).append("\n");
         }
         summary.append("---------------\n");
@@ -51,7 +56,7 @@ public class Order {
 
     public String toString(){
         return customer + "\n" +
-                "Ordered: " + menuItems;
+                "Ordered: " + orderedItems;
     }
 
 }

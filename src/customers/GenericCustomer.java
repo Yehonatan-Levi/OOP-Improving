@@ -1,15 +1,14 @@
 package customers;
 
+import discount.Discount;
 import interfaces.ICustomer;
-import interfaces.IMenuItem;
 
 import java.util.ArrayList;
-import java.util.function.Function;
 
 public abstract class GenericCustomer implements ICustomer {
 
     private String name;
-    private Function<ArrayList<IMenuItem>, Double> discount;
+    private ArrayList<Discount> discounts;
     private PaymentMethod paymentMethod;
 
     public GenericCustomer(String name, PaymentMethod paymentMethod){
@@ -26,12 +25,20 @@ public abstract class GenericCustomer implements ICustomer {
         this.name = name;
     }
 
-    public double getDiscount(ArrayList<IMenuItem> menuItems) {
-        return discount.apply(menuItems);
+    public ArrayList<Discount> getDiscounts() {
+        return this.discounts;
     }
 
-    public void setDiscount(Function<ArrayList<IMenuItem>, Double> discount) {
-        this.discount = discount;
+    public void addDiscount(Discount discount){
+        this.discounts.add(discount);
+    }
+
+    public void addDiscounts(ArrayList<Discount> discounts){
+        this.discounts.addAll(discounts);
+    }
+
+    public void setDiscounts(ArrayList<Discount> discounts) {
+        this.discounts = discounts;
     }
 
     @Override

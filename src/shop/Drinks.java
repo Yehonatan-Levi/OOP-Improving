@@ -1,3 +1,5 @@
+package shop;
+
 import interfaces.IMenuItem;
 
 public enum Drinks implements IMenuItem {

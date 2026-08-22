@@ -1,10 +1,9 @@
 package interfaces;
 
 import customers.PaymentMethod;
+import discount.Discount;
 
 import java.util.ArrayList;
-
-import java.util.function.Function;
 
 public interface ICustomer {
 
@@ -12,6 +11,6 @@ public interface ICustomer {
 
     PaymentMethod getPaymentMethod();
 
-    double getDiscount(ArrayList<IMenuItem> menuItems);
+    ArrayList<Discount> getDiscounts();
 
 }

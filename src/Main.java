@@ -3,6 +3,8 @@
 
 
 import customers.*;
+import shop.Drinks;
+import shop.Order;
 
 void main() {
     GenericCustomer customer = new RegularCustomer("Jonathan", PaymentMethod.GIFT_CARD);
