@@ -1,12 +1,19 @@
 package shop;
 
+import discount.Discount;
+import discount.DiscountConstants;
 import discount.DiscountHandler;
 import interfaces.ICustomer;
 import interfaces.IMenuItem;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Order {
+
+    private final double MIN_ORDER_TOTAL = 0;
+    private final Discount[] ACTIVE_SHOP_DISCOUNTS = {DiscountConstants.BUY_TWO_GET_ONE_FREE_COFFEE, DiscountConstants.WEEKEND_TEA_DISCOUNT};
 
     private final ICustomer customer;
     private final ArrayList<IMenuItem> orderedItems;
@@ -15,7 +22,7 @@ public class Order {
     public Order(ICustomer customer){
         this.customer = customer;
         this.orderedItems = new ArrayList<>();
-        this.discountHandler = new DiscountHandler(customer.getDiscounts(), ShopConstants.ACTIVE_STORE_DISCOUNTS);
+        this.discountHandler = new DiscountHandler(customer.getDiscounts(), new ArrayList<>(Arrays.asList(ACTIVE_SHOP_DISCOUNTS)));
     }
 
     public void addDrink(IMenuItem menuItem){
@@ -35,11 +42,11 @@ public class Order {
     }
 
     public double getTotal(){
-        return getSubtotal() - getDiscount();
+        return Math.max(getSubtotal() - getDiscount(), MIN_ORDER_TOTAL);
     }
 
-    public void pay(double amount){
-        System.out.println("Paid " + amount + " " + this.customer.getPaymentMethod().getUsage_message());
+    public void pay(){
+        System.out.println("Paid " + this.getTotal() + " " + this.customer.getPaymentMethod().getUsage_message());
     }
 
     public String summary(){

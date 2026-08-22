@@ -14,6 +14,7 @@ public abstract class GenericCustomer implements ICustomer {
     public GenericCustomer(String name, PaymentMethod paymentMethod){
         this.name = name;
         this.paymentMethod = paymentMethod;
+        this.discounts = new ArrayList<>();
     }
 
     @Override

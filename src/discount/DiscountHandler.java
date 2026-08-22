@@ -11,6 +11,8 @@ public class DiscountHandler {
 
     public DiscountHandler(ArrayList<Discount> customerDiscounts, ArrayList<Discount> shopPromotions){
         ArrayList<Discount> temporaryAbsoluteDiscounts = new ArrayList<>();
+        this.discounts = new ArrayList<>();
+
         for (Discount discount : customerDiscounts){
             if (discount.getDiscountType().equals(DiscountTypes.PERCENTAGE_DISCOUNT)) {
                 this.discounts.add(discount);
@@ -31,11 +33,11 @@ public class DiscountHandler {
     }
 
     public double getDiscount(ArrayList<IMenuItem> menuItems){
-        double discount = 0;
-        for (Discount absoluteDiscount : this.discounts){
-            discount += absoluteDiscount.getDiscountFunction().apply(menuItems);
+        double totalDiscounts = 0;
+        for (Discount discount : this.discounts){
+            totalDiscounts += discount.getDiscountFunction().apply(menuItems);
         }
-        return discount;
+        return totalDiscounts;
     }
 
 }

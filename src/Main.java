@@ -11,10 +11,10 @@ void main() {
     Order order = new Order(customer);
 
     order.addDrink(Drinks.COFFEE);
-    order.addDrink(Drinks.TEA);
-    order.addDrink(Drinks.TEA);
+    order.addDrink(Drinks.COFFEE);
+    order.addDrink(Drinks.COFFEE);
+
 
     System.out.println(order.summary());
-    order.pay(order.getTotal());
 
 }
