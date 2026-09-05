@@ -12,9 +12,9 @@ void main() {
     for (int i = 0; i < 7; i += 3){
         rideManager.getVehiclesList().addVehicle(VehicleFactory.createVehicle(VehicleTypes.Van, i , "ABC-1234" + i));
         rideManager.getVehiclesList().addVehicle(VehicleFactory.createVehicle(VehicleTypes.Car, i + 1 , "ABC-1234" + (i + 1)));
-        rideManager.getVehiclesList().addVehicle(VehicleFactory.createVehicle(VehicleTypes.Van, i + 2 , "ABC-1234" + (i + 2)));
+        rideManager.getVehiclesList().addVehicle(VehicleFactory.createVehicle(VehicleTypes.Motorcycle, i + 2 , "ABC-1234" + (i + 2)));
     }
-    RideRequest rideRequest = new RideRequest(6, VehicleTypes.Any);
+    RideRequest rideRequest = new RideRequest(3, VehicleTypes.Any);
     Ride ride = rideManager.getRide(rideRequest, "Alon");
     ride.startRide();
 }
