@@ -7,8 +7,8 @@ public class Car extends Vehicle{
     }
 
     @Override
-    public boolean start() {
-        System.out.println("Car is starting");
-        return true;
+    public String start() {
+        return "Car is starting";
     }
+
 }

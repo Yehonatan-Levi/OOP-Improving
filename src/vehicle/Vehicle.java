@@ -22,4 +22,9 @@ public abstract class Vehicle implements IVehicle{
     public int getPassengerLimit() {
         return PASSENGER_LIMIT;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName() + getLicensePlate();
+    }
 }

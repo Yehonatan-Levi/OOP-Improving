@@ -1,6 +1,6 @@
 package vehicle;
 
 public interface IVehicle {
-    public boolean start();
+    public String start();
     public int getPassengerLimit();
 }
