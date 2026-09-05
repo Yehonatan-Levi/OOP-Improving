@@ -26,8 +26,9 @@ public class RideManager {
     public Ride getRide(RideRequest rideRequest, String driver){
         ArrayList<IVehicle> availableVehicles = this.getAvailableVehicles();
         Ride ride = new Ride (driver,
-                getAvailableVehicle(rideRequest.getRequestedVehicle(), availableVehicles),
+                getAvailableVehicle(rideRequest.getRequestedVehicle(), availableVehicles, rideRequest.getPassengerCount()),
                 rideRequest.getPassengerCount());
+        ride.getVehicle().setIsAvailable(false);
         System.out.println(assignRideText(rideRequest, ride, availableVehicles));
         return ride;
     }
@@ -38,11 +39,16 @@ public class RideManager {
         return availableVehicles;
     }
 
-    private IVehicle getAvailableVehicle(VehicleTypes vehicleType, ArrayList<IVehicle> vehicles) throws RuntimeException {
+    private IVehicle getAvailableVehicle(VehicleTypes vehicleType, ArrayList<IVehicle> vehicles, int passengersCount) throws RuntimeException {
         switch (vehicleType){
             case Any -> {
                 priorityAnyVehicleRequest.accept(vehicles);
-                return vehicles.getFirst();
+                for (IVehicle vehicle : vehicles){
+
+                    if (vehicle.getPassengerLimit() >= passengersCount){
+                        return vehicle;
+                    }
+                }
             }
             case Car -> {
                 for (IVehicle vehicle: vehicles){
