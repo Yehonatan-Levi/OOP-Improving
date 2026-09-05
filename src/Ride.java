@@ -18,6 +18,9 @@ public class Ride {
             System.out.println(vehicle.start());
             System.out.println("ride started");
         }
+        else {
+            System.out.println("Invalid ride: too many passengers");
+        }
     }
 
     private boolean isValidRide(){

@@ -25,6 +25,6 @@ public abstract class Vehicle implements IVehicle{
 
     @Override
     public String toString() {
-        return this.getClass().getName() + getLicensePlate();
+        return this.getClass().getName().substring(8) + " "+ getLicensePlate();
     }
 }
