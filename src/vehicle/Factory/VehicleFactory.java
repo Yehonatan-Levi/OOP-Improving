@@ -8,6 +8,7 @@ public class VehicleFactory {
             case Car -> CarFactory.createCar(id, licensePlate);
             case Van -> VanFactory.createVan(id, licensePlate);
             case Motorcycle -> MotorcycleFactory.createMotorcycle(id, licensePlate);
+            case null, default -> throw new RuntimeException("not a valid vehicle type for creation");
         };
     }
 }

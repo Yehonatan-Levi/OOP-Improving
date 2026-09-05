@@ -1,9 +1,11 @@
+package ride;
+
 import vehicle.IVehicle;
 
 public class Ride {
-    private String driver;
-    private IVehicle vehicle;
-    private int passengers;
+    private final String driver;
+    private final IVehicle vehicle;
+    private final int passengers;
 
     public Ride(String driver, IVehicle vehicle, int passengers){
         this.driver = driver;
