@@ -1,11 +1,11 @@
-import vehicle.Vehicle;
+import vehicle.IVehicle;
 
 public class Ride {
     private String driver;
-    private Vehicle vehicle;
+    private IVehicle vehicle;
     private int passengers;
 
-    public Ride(String driver, Vehicle vehicle, int passengers){
+    public Ride(String driver, IVehicle vehicle, int passengers){
         this.driver = driver;
         this.vehicle = vehicle;
         this.passengers = passengers;
