@@ -21,4 +21,11 @@ public class RideRequest implements  IRideRequest{
     public VehicleTypes getRequestedVehicle() {
         return requestedVehicle;
     }
+
+    @Override
+    public String toString() {
+        return "Request:\n" +
+                "Passengers: " + passengerCount + "\n" +
+                "Vehicle type: " + requestedVehicle.name();
+    }
 }

@@ -2,6 +2,7 @@ package ride;
 
 import vehicle.*;
 import vehicle.Factory.VehicleTypes;
+import vehicle.Factory.VehiclesList;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -9,44 +10,43 @@ import java.util.function.Consumer;
 
 public class RideManager {
 
-    private final ArrayList<IVehicle> vehicles;
     private final Consumer<ArrayList<IVehicle>> priorityAnyVehicleRequest = (arrayList) -> {
         arrayList.sort(Comparator.comparingInt(IVehicle::getPassengerLimit));
     };
+    private final VehiclesList vehiclesList;
 
     public RideManager(){
-        this.vehicles = new ArrayList<>();
+        vehiclesList = new VehiclesList();
     }
 
-    public RideManager(ArrayList<IVehicle> vehicles){
-        this.vehicles = new ArrayList<>();
-        this.vehicles.addAll(vehicles);
-    }
-
-    public void addVehicle(IVehicle vehicle){
-        this.vehicles.add(vehicle);
+    public VehiclesList getVehiclesList(){
+        return vehiclesList;
     }
 
     public Ride getRide(RideRequest rideRequest, String driver){
-        return new Ride (driver,
-                getAvailableVehicle(rideRequest.getRequestedVehicle()),
+        ArrayList<IVehicle> availableVehicles = this.getAvailableVehicles();
+        Ride ride = new Ride (driver,
+                getAvailableVehicle(rideRequest.getRequestedVehicle(), availableVehicles),
                 rideRequest.getPassengerCount());
+        System.out.println(assignRideText(rideRequest, ride, availableVehicles));
+        return ride;
     }
 
-    private IVehicle getAvailableVehicle(VehicleTypes vehicleType) throws RuntimeException {
+    private ArrayList<IVehicle> getAvailableVehicles() {
+        ArrayList<IVehicle> availableVehicles = new ArrayList<>(this.vehiclesList.getVehicles());
+        availableVehicles.removeIf(vehicle -> !vehicle.getIsAvailable());
+        return availableVehicles;
+    }
+
+    private IVehicle getAvailableVehicle(VehicleTypes vehicleType, ArrayList<IVehicle> vehicles) throws RuntimeException {
         switch (vehicleType){
             case Any -> {
                 priorityAnyVehicleRequest.accept(vehicles);
-                for (IVehicle vehicle: vehicles){
-                    if (vehicle.getIsAvailable()){
-                        return vehicle;
-                    }
-                }
-                throw new RuntimeException("no vehicles available");
+                return vehicles.getFirst();
             }
             case Car -> {
                 for (IVehicle vehicle: vehicles){
-                    if (vehicle instanceof Car && vehicle.getIsAvailable()){
+                    if (vehicle instanceof Car){
                         return vehicle;
                     }
                 }
@@ -54,7 +54,7 @@ public class RideManager {
             }
             case Van -> {
                 for (IVehicle vehicle: vehicles){
-                    if (vehicle instanceof Van && vehicle.getIsAvailable()){
+                    if (vehicle instanceof Van){
                         return vehicle;
                     }
                 }
@@ -62,7 +62,7 @@ public class RideManager {
             }
             case Motorcycle -> {
                 for (IVehicle vehicle: vehicles){
-                    if (vehicle instanceof Motorcycle && vehicle.getIsAvailable()){
+                    if (vehicle instanceof Motorcycle){
                         return vehicle;
                     }
                 }
@@ -70,5 +70,13 @@ public class RideManager {
             }
         }
         throw new RuntimeException("no vehicles available");
+    }
+
+    private String assignRideText(RideRequest rideRequest, Ride ride, ArrayList<IVehicle> availableVehicles){
+        return rideRequest + "\n\n" +
+                "Available Vehicles:\n" +
+                VehiclesUtils.vehicleListSummary(availableVehicles) +"\n\n" +
+                "Result:\n" +
+                ride.getVehicle().toString() + " assigned";
     }
 }

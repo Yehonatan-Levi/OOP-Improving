@@ -13,6 +13,10 @@ public class Ride {
         this.passengers = passengers;
     }
 
+    public IVehicle getVehicle() {
+        return vehicle;
+    }
+
     public void startRide(){
         if (isValidRide()){
             System.out.println(this.toString() + "\n");
