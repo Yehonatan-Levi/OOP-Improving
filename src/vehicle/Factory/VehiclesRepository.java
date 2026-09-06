@@ -35,17 +35,18 @@ public class VehiclesRepository {
     }
 
     public IVehicle getAvailableVehicle(VehicleTypes vehicleType, int passengersCount, Comparator<IVehicle> compareByPriority) throws RuntimeException {
+        this.setPriority(compareByPriority);
+        ArrayList<IVehicle> availableVehicles = this.getAvailableVehicles();
         switch (vehicleType){
             case Any -> {
-                this.setPriority(compareByPriority);
-                for (IVehicle vehicle : vehicles){
+                for (IVehicle vehicle : availableVehicles){
                     if (vehicle.getPassengerLimit() >= passengersCount){
                         return vehicle;
                     }
                 }
             }
             case Car -> {
-                for (IVehicle vehicle: vehicles){
+                for (IVehicle vehicle: availableVehicles){
                     if (vehicle instanceof Car){
                         return vehicle;
                     }
@@ -53,7 +54,7 @@ public class VehiclesRepository {
                 throw new RuntimeException("no Car available");
             }
             case Van -> {
-                for (IVehicle vehicle: vehicles){
+                for (IVehicle vehicle: availableVehicles){
                     if (vehicle instanceof Van){
                         return vehicle;
                     }
@@ -61,7 +62,7 @@ public class VehiclesRepository {
                 throw new RuntimeException("no Van available");
             }
             case Motorcycle -> {
-                for (IVehicle vehicle: vehicles){
+                for (IVehicle vehicle: availableVehicles){
                     if (vehicle instanceof Motorcycle){
                         return vehicle;
                     }

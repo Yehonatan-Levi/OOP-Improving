@@ -9,7 +9,7 @@ import java.util.Comparator;
 
 public class RideManager {
 
-    private final Comparator<IVehicle> priorityAnyVehicleRequest = Comparator.comparingInt(IVehicle::getPassengerLimit);
+    private final Comparator<IVehicle> priorityAnyVehicleRequest = (vehicle1, vehicle2) -> vehicle1.getPassengerLimit() - vehicle2.getPassengerLimit();
     private final VehiclesRepository vehicles;
 
     public RideManager (VehiclesRepository vehicles){
