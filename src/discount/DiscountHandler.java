@@ -9,7 +9,7 @@ public class DiscountHandler {
     public static double calculateDiscount(Ride ride, ArrayList<Discounts> discounts, ArrayList<Discounts> discountPolicy){
         double discountsSum = 0;
         ArrayList<Discounts> viableDiscounts = discounts.stream().filter(discountPolicy::contains).collect(Collectors.toCollection(ArrayList::new));
-        for (Discounts discount : discounts){
+        for (Discounts discount : viableDiscounts){
             discountsSum += discount.apply(ride);
         }
         return discountsSum;
