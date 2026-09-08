@@ -35,10 +35,6 @@ public class RideOrderManager {
         return ride;
     }
 
-     private double getDiscount(Ride ride, IClient client){
-        return DiscountHandler.calculateDiscount(ride, client.getDiscounts(), discountPolicy);
-     }
-
      public double getTotalPrice(Ride ride){
         return ride.getPrice() - DiscountHandler.calculateDiscount(ride, ride.getClient().getDiscounts(), discountPolicy);
      }
