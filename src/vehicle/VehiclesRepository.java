@@ -38,6 +38,7 @@ public class VehiclesRepository implements IVehiclesCollection{
             case Any -> {
                 for (IVehicle vehicle : availableVehicles){
                     if (vehicle.getPassengerLimit() >= passengersCount){
+                        vehicle.setTaken();
                         return vehicle;
                     }
                 }
@@ -45,6 +46,7 @@ public class VehiclesRepository implements IVehiclesCollection{
             case Car -> {
                 for (IVehicle vehicle: availableVehicles){
                     if (vehicle instanceof Car){
+                        vehicle.setTaken();
                         return vehicle;
                     }
                 }
@@ -53,6 +55,7 @@ public class VehiclesRepository implements IVehiclesCollection{
             case Van -> {
                 for (IVehicle vehicle: availableVehicles){
                     if (vehicle instanceof Van){
+                        vehicle.setTaken();
                         return vehicle;
                     }
                 }
@@ -61,6 +64,7 @@ public class VehiclesRepository implements IVehiclesCollection{
             case Motorcycle -> {
                 for (IVehicle vehicle: availableVehicles){
                     if (vehicle instanceof Motorcycle){
+                        vehicle.setTaken();
                         return vehicle;
                     }
                 }
