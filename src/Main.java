@@ -1,4 +1,6 @@
-import ride.RideManager;
+import client.Client;
+import client.Member;
+import ride.RideOrderManager;
 import ride.RideRequest;
 import vehicle.Factory.VehicleFactory;
 import vehicle.Factory.VehicleTypes;
@@ -14,8 +16,18 @@ void main() {
         vehicles.addVehicle(VehicleFactory.createVehicle(VehicleTypes.Car, i + 1 , "ABC-1234" + (i + 1)));
         vehicles.addVehicle(VehicleFactory.createVehicle(VehicleTypes.Motorcycle, i + 2 , "ABC-1234" + (i + 2)));
     }
-    RideManager rideManager = new RideManager(vehicles);
-    RideRequest rideRequest = new RideRequest(3, VehicleTypes.Any, 12);
-    Ride ride = rideManager.assignRide(rideRequest, "Alon");
+    RideOrderManager rideOrderManager = new RideOrderManager(vehicles);
+    Client client = new Client();
+    client.Member member = new Member();
+
+    RideRequest rideRequest = new RideRequest(3, VehicleTypes.Any, 12, client);
+    Ride ride = rideOrderManager.assignRide(rideRequest, "Alon");
+    System.out.println("\n**************\n" + rideOrderManager.getTotalPrice(ride) + "**************\n");
     ride.startRide();
+
+    RideRequest anotherRideRequest = new RideRequest(3, VehicleTypes.Any, 12, member);
+    Ride anotherRide = rideOrderManager.assignRide(anotherRideRequest, "Different Alon");
+    System.out.println("\n**************\n" + rideOrderManager.getTotalPrice(anotherRide) + "\n**************\n");
+    anotherRide.startRide();
+
 }

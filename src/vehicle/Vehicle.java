@@ -35,8 +35,13 @@ public abstract class Vehicle implements IVehicle{
         return pricePerKm;
     }
 
-    public void setIsAvailable(boolean isAvailable){
-        this.isAvailable = isAvailable;
+    @Override
+    public void setTaken() {
+        isAvailable = false;
+    }
+
+    public void setAvailable(){
+        isAvailable = true;
     }
 
     @Override

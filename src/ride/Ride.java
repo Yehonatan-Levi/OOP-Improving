@@ -1,5 +1,6 @@
 package ride;
 
+import client.IClient;
 import vehicle.IVehicle;
 
 public class Ride {
@@ -7,12 +8,14 @@ public class Ride {
     private final IVehicle vehicle;
     private final int passengers;
     private final double km;
+    private final IClient client;
 
-    public Ride(String driver, IVehicle vehicle, int passengers, double km){
+    public Ride(String driver, IVehicle vehicle, int passengers, double km, IClient client){
         this.driver = driver;
         this.vehicle = vehicle;
         this.passengers = passengers;
         this.km = km;
+        this.client = client;
     }
 
     public IVehicle getVehicle() {
@@ -34,6 +37,8 @@ public class Ride {
     public double getPrice(){
         return this.km * this.vehicle.getPricePerKm();
     }
+
+    public IClient getClient() {return client;}
 
     private boolean isValidRide(){
         return passengers <= vehicle.getPassengerLimit();
