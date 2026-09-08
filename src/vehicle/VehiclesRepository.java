@@ -1,15 +1,12 @@
-package vehicle.Factory;
+package vehicle;
 
-import vehicle.Car;
-import vehicle.IVehicle;
-import vehicle.Motorcycle;
-import vehicle.Van;
+import vehicle.Factory.VehicleTypes;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-public class VehiclesRepository {
+public class VehiclesRepository implements IVehiclesCollection{
     private final ArrayList<IVehicle> vehicles;
 
     public VehiclesRepository(){
@@ -24,7 +21,7 @@ public class VehiclesRepository {
         return vehicles;
     }
 
-    public ArrayList<IVehicle> getAvailableVehicles(){
+    private ArrayList<IVehicle> getAvailableVehicles(){
         return vehicles.stream()
                 .filter(IVehicle::getIsAvailable)
                 .collect(Collectors.toCollection(ArrayList::new));

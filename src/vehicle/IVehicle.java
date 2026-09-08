@@ -5,5 +5,6 @@ public interface IVehicle {
     public int getPassengerLimit();
     public boolean getIsAvailable();
     public void setIsAvailable(boolean isAvailable);
+    public double getPricePerKm();
 
 }

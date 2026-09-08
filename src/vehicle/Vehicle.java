@@ -1,15 +1,17 @@
 package vehicle;
 
 public abstract class Vehicle implements IVehicle{
-    private final int ID;
-    private final String LICENSE_PLATE;
-    private final int PASSENGER_LIMIT;
-    private boolean isAvailable;
+    protected final int ID;
+    protected final String LICENSE_PLATE;
+    protected final int PASSENGER_LIMIT;
+    protected double pricePerKm;
+    protected boolean isAvailable;
 
-    public Vehicle(int id, String licensePlate, int passengerLimit){
+    public Vehicle(int id, String licensePlate, int passengerLimit, double pricePerKm){
         this.ID = id;
         this.LICENSE_PLATE = licensePlate;
         this.PASSENGER_LIMIT = passengerLimit;
+        this.pricePerKm = pricePerKm;
         this.isAvailable = true;
     }
 
@@ -27,6 +29,10 @@ public abstract class Vehicle implements IVehicle{
 
     public boolean getIsAvailable(){
         return isAvailable;
+    }
+
+    public double getPricePerKm(){
+        return pricePerKm;
     }
 
     public void setIsAvailable(boolean isAvailable){

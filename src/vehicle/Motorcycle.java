@@ -2,8 +2,8 @@ package vehicle;
 
 public class Motorcycle extends Vehicle {
 
-    public Motorcycle(int id, String licensePlate, int passengerLimit) {
-        super(id, licensePlate, passengerLimit);
+    public Motorcycle(int id, String licensePlate, int passengerLimit, int pricePerKm) {
+        super(id, licensePlate, passengerLimit, pricePerKm);
     }
 
     @Override

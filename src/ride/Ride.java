@@ -6,11 +6,13 @@ public class Ride {
     private final String driver;
     private final IVehicle vehicle;
     private final int passengers;
+    private final double km;
 
-    public Ride(String driver, IVehicle vehicle, int passengers){
+    public Ride(String driver, IVehicle vehicle, int passengers, double km){
         this.driver = driver;
         this.vehicle = vehicle;
         this.passengers = passengers;
+        this.km = km;
     }
 
     public IVehicle getVehicle() {
@@ -29,11 +31,15 @@ public class Ride {
         }
     }
 
+    public double getPrice(){
+        return this.km * this.vehicle.getPricePerKm();
+    }
+
     private boolean isValidRide(){
         return passengers <= vehicle.getPassengerLimit();
     }
 
     public String toString(){
-        return "Driver: " + driver  + "\nVehicle: " + vehicle + "\nPassengers: " + passengers;
+        return "Driver: " + driver  + "\nVehicle: " + vehicle + "\nPassengers: " + passengers + "\nPrice: " + this.getPrice();
     }
 }

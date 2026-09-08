@@ -2,8 +2,7 @@ import ride.RideManager;
 import ride.RideRequest;
 import vehicle.Factory.VehicleFactory;
 import vehicle.Factory.VehicleTypes;
-import vehicle.Factory.VehiclesRepository;
-import vehicle.Vehicle;
+import vehicle.VehiclesRepository;
 import ride.Ride;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -16,7 +15,7 @@ void main() {
         vehicles.addVehicle(VehicleFactory.createVehicle(VehicleTypes.Motorcycle, i + 2 , "ABC-1234" + (i + 2)));
     }
     RideManager rideManager = new RideManager(vehicles);
-    RideRequest rideRequest = new RideRequest(3, VehicleTypes.Any);
+    RideRequest rideRequest = new RideRequest(3, VehicleTypes.Any, 12);
     Ride ride = rideManager.assignRide(rideRequest, "Alon");
     ride.startRide();
 }
